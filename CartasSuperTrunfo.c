@@ -1,53 +1,60 @@
 #include <stdio.h>
 
-// Desafio Super Trunfo - Países
-// Tema 1 - Cadastro das Cartas
-// Este código inicial serve como base para o desenvolvimento do sistema de cadastro de cartas de cidades.
-// Siga os comentários para implementar cada parte do desafio.
-//Teste larissa
+// Declarando as variáveis globais
+char estado[4], cidade[50], codigo[11]; // Strings para armazenar estado, cidade e código
+int populacao, pontostu;                // Inteiros para população e pontos turísticos
+float area, PIB, PIBperCap, pessoaKm;   // Floats para área, PIB, PIB per capita e densidade populacional
 
-int main() {
-    // Sugestão: Defina variáveis separadas para cada atributo da cidade.
-    // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
-    
-    int codigo, populacao, PIB, pontos_tu; // Cria variaveis de valores inteiros
-    char nome[50]; // Cria uma variavel que pode armazenar uma string
-    float area; // Cria um valor numerico com casas decimais
-    
-    // Cadastro das Cartas:
-    // Sugestão: Utilize a função scanf para capturar as entradas do usuário para cada atributo.
-    // Solicite ao usuário que insira as informações de cada cidade, como o código, nome, população, área, etc.
-    
+// Função para entrada de dados
+void EntradaDados() {
+    printf("Digite a sigla do estado: ");
+    fgets(estado, sizeof(estado), stdin); // Lê a sigla do estado (2 caracteres + '\0')
+
     printf("Digite o nome da cidade: ");
-    fgets(nome, 50, stdin); 
+    fgets(cidade, sizeof(cidade), stdin); // Lê o nome da cidade
 
-    printf("Digite a população: ");
-    scanf("%d", &populacao);
-    
-    printf("Digite a área: ");
-    scanf("%f", &area);
-    
-    printf("Digite o PIB: ");
-    scanf("%d", &PIB);
-    
-    printf("Digite o número de pontos turísticos: ");
-    scanf("%d", &pontos_tu);
-    
-    printf("Digite o código da cidade: "); // Pede para digitar um valor
-    scanf("%d", &codigo); // Armazena o valor digitado na variavel
-    
-    // Exibição dos Dados das Cartas:
-    // Sugestão: Utilize a função printf para exibir as informações das cartas cadastradas de forma clara e organizada.
-    // Exiba os valores inseridos para cada atributo da cidade, um por linha.
+    printf("Digite o código da carta: ");
+    fgets(codigo, sizeof(codigo), stdin); // Lê o código da carta
 
-    // Escreve as caracteristicas da carta no terminal
-    printf("\n|| Informações da carta: ||\n");
-    printf(">> Nome da cidade: %s", nome);
-    printf(">> População: %d\n", populacao);
-    printf(">> Área por km²: %.2f\n", area);
-    printf(">> PIB: %d\n", PIB);
-    printf(">> Qnt. Pontos Turisticos: %d\n", pontos_tu);
-    printf(">> Código da cidade: %d\n", codigo);
+    printf("Digite o PIB do estado: ");
+    scanf("%f", &PIB); // Lê o PIB
 
-    return 0;
+    printf("Digite a populacao do estado: ");
+    scanf("%d", &populacao); // Lê a população
+
+    printf("Digite a quantidade de pontos turisticos: ");
+    scanf("%d", &pontostu); // Lê a quantidade de pontos turísticos
+
+    printf("Digite a area do estado (em km²): ");
+    scanf("%f", &area); // Lê a área do estado
+
+    // Limpa o buffer do teclado após o uso do scanf
+    while (getchar() != '\n');
+}
+
+// Função para calcular PIB per capita e densidade populacional
+void CalculandoMedia() {
+    PIBperCap = (float) PIB / populacao; // Calcula o PIB per capita
+    pessoaKm = (float) populacao / area; // Calcula a densidade populacional (pessoas por km²)
+}
+
+// Função para exibir os dados
+void MostrandoDados() {
+    printf("\n|| Dados da Carta ||\n");
+    printf(">> Estado: %s", estado); // Exibe a sigla do estado
+    printf(">> Cidade: %s", cidade); // Exibe o nome da cidade
+    printf(">> Código da Carta: %s", codigo); // Exibe o nome da cidade
+    printf(">> Área: %.2f km²\n", area); // Exibe a área
+    printf(">> População: %d\n", populacao); // Exibe a população
+    printf(">> PIB: %.2f\n", PIB); // Exibe o PIB
+    printf(">> Pessoas por km²: %.2f\n", pessoaKm); // Exibe a densidade populacional
+    printf(">> PIB per capita: %.2f\n", PIBperCap); // Exibe o PIB per capita
+}
+
+// Função principal
+int main() {
+    EntradaDados(); // Chama a função para entrada de dados
+    CalculandoMedia(); // Chama a função para calcular médias
+    MostrandoDados(); // Chama a função para exibir os dados
+    return 0; // Retorna 0 indicando sucesso
 }
